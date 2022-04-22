@@ -58,7 +58,7 @@ app.use(express.static("public"));
 // const items = ["Buy Food", "Cook Food", "Eat Food"];
 // const workItems = [];
 
-app.get("/", function(req, res) {
+app.get("/", (req,res) => {
 
 // const day = date.getDate();
   Item.find({}, (err, foundItems) => {
@@ -81,7 +81,7 @@ app.get("/", function(req, res) {
 
 });
 
-app.get("/:customListName", (req, res) => {
+app.get("/:customListName", (req,res) => {
   const customListName = _.capitalize(req.params.customListName);
 
   List.findOne({name: customListName},(err, foundList) =>{
@@ -105,7 +105,7 @@ app.get("/:customListName", (req, res) => {
   
 });
 
-app.post("/", function(req, res){
+app.post("/", (req,res) => {
 
   const itemName = req.body.newItem;
   const listName = req.body.list;
@@ -128,7 +128,7 @@ app.post("/", function(req, res){
   
 });
 
-app.post("/delete", function(req,res){
+app.post("/delete", (req,res) => {
   const checkedTask = req.body.checked;
   const listName = req.body.listName;
 
@@ -154,10 +154,10 @@ app.post("/delete", function(req,res){
 });
 
 
-app.get("/about", function(req, res){
+app.get("/about", (req,res) => {
   res.render("about");
 });
 
-app.listen(process.env.PORT || port, function() {
+app.listen(process.env.PORT || port, () => {
   console.log("Server started on port 3000");
 });
